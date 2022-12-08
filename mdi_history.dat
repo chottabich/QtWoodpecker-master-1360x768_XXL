@@ -1,0 +1,18 @@
+g20
+HALSHOW
+G20
+HALMETER
+O<auto_tool_zero> call [0]
+O<auto_tool_zero> call [0]
+O<auto_tool_zero> call [0]
+O<auto_tool_zero> call [0]
+O<auto_tool_zero> call [0]
+O<auto_tool_zero> call [0]
+O<auto_tool_zero> call [0]
+O<auto_tool_zero> call [0]
+HALSHOW
+G20
+G21
+G20
+G21
+G20

@@ -1,0 +1,46 @@
+2022-12-08 08:26:13,565 - QTvcp.QTVCP.QT_ISTAT - WARNING - Invalid message configuration (missing icon) in INI File [DISPLAY] sectioN
+2022-12-08 08:26:14,225 - QTvcp - INFO - Logging to: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/woodpecker.log
+2022-12-08 08:26:14,225 - QTvcp - INFO - Base log level set to: 10
+2022-12-08 08:26:14,225 - QTvcp.QTVCP.QT_PSTAT - DEBUG - BASEPATH sim_panel
+2022-12-08 08:26:14,225 - QTvcp.QTVCP.QT_PSTAT - DEBUG - Checking for handler file in: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/sim_panel_handler.py
+2022-12-08 08:26:14,225 - QTvcp.QTVCP.QT_PSTAT - INFO - Using LOCAL handler file path: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/sim_panel_handler.py
+2022-12-08 08:26:14,226 - QTvcp.QTVCP.QT_PSTAT - DEBUG - Checking for .ui in: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/sim_panel.ui
+2022-12-08 08:26:14,226 - QTvcp.QTVCP.QT_PSTAT - INFO - Using LOCAL ui file from: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/sim_panel.ui
+2022-12-08 08:26:14,226 - QTvcp.QTVCP.QT_PSTAT - DEBUG - Checking for .qss in: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/sim_panel.qss
+2022-12-08 08:26:14,226 - QTvcp.QTVCP.QT_PSTAT - INFO - Using LOCAL qss file from: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/sim_panel.qss
+2022-12-08 08:26:14,226 - QTvcp.QTVCP.QT_PSTAT - DEBUG - Checking for .qrc in: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/sim_panel.qrc
+2022-12-08 08:26:14,226 - QTvcp.QTVCP.QT_PSTAT - INFO - Using LOCAL qrc file from: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/sim_panel.qrc
+2022-12-08 08:26:14,226 - QTvcp.QTVCP.QT_PSTAT - DEBUG - Checking for resources.py in: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/qtvcp/panels/resources.py
+2022-12-08 08:26:14,227 - QTvcp.QTVCP.QT_PSTAT - INFO - Using LOCAL resources.py file from: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/qtvcp/panels/resources.py
+2022-12-08 08:26:14,229 - QTvcp.QTVCP.QT_PSTAT - DEBUG - Checking for translation file in: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/sim_panel/languages/sim_panel_ru.qm
+2022-12-08 08:26:14,229 - QTvcp.QTVCP.QT_PSTAT - DEBUG - Checking for translation file in: /usr/share/qtvcp/screens/sim_panel/languages/sim_panel_ru.qm
+2022-12-08 08:26:14,229 - QTvcp.QTVCP.QT_PSTAT - INFO - Using no translations, default system locale is: ru
+2022-12-08 08:26:14,229 - QTvcp - INFO - Building A VCP Panel with: Python 3
+2022-12-08 08:26:14,229 - QTvcp - INFO - No handler file specified - using: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/sim_panel_handler.py
+2022-12-08 08:26:14,229 - QTvcp - INFO - No HAL component base name specified - using: sim_panel
+2022-12-08 08:26:14,230 - QTvcp.QTVCP.QT_MAKEGUI - INFO - Qsettings file path: /home/jura/.config/QtVcp/sim_panel.conf
+2022-12-08 08:26:14,231 - QTvcp - DEBUG - Loading the handler file.
+2022-12-08 08:26:14,231 - QTvcp.QTVCP.QT_MAKEGUI - DEBUG - Adding import dir: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)
+2022-12-08 08:26:14,231 - QTvcp.QTVCP.QT_MAKEGUI - DEBUG - Module 'sim_panel_handler' imported OK
+2022-12-08 08:26:14,232 - QTvcp.QTVCP.QT_MAKEGUI - DEBUG - Module 'sim_panel_handler' : 'get_handlers' function found.
+2022-12-08 08:26:14,232 - QTvcp.QTVCP.QT_MAKEGUI - DEBUG - Registering handlers in module sim_panel_handler object <sim_panel_handler.HandlerClass object at 0x7fa64279fc18>
+2022-12-08 08:26:14,232 - QTvcp.QTVCP.QT_MAKEGUI - DEBUG - Register callback 'btn_zero_all_clicked'
+2022-12-08 08:26:14,232 - QTvcp.QTVCP.QT_MAKEGUI - DEBUG - Register callback 'call_user_command_'
+2022-12-08 08:26:14,232 - QTvcp.QTVCP.QT_MAKEGUI - DEBUG - Register callback 'updateIncrementPin'
+2022-12-08 08:26:14,233 - QTvcp - DEBUG - Adding the key events filter.
+2022-12-08 08:26:14,233 - QTvcp.QTVCP.QT_MAKEGUI - INFO - Imported resources.py filed: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/qtvcp/panels/resources.py
+2022-12-08 08:26:14,279 - QTvcp.QTVCP.WIDGETS.SCREEN_OPTIONS - DEBUG - Switching to Preference File Path from INI: WORKINGFOLDER/woodpecker.pref
+2022-12-08 08:26:14,282 - QTvcp.QTVCP.QT_MAKEPINS - DEBUG - QTVCP: Parsing for HAL widgets.
+2022-12-08 08:26:14,625 - QTvcp.QTVCP.WIDGETS.WIDGET_BASECLASS - WARNING - No objectName for HAL pin: <qtvcp.widgets.dialog_widget.LcncDialog object at 0x7fa641e13e58>
+2022-12-08 08:26:14,632 - QTvcp.QTVCP.WIDGETS.WIDGET_BASECLASS - WARNING - No objectName for HAL pin: <qtvcp.widgets.dialog_widget.LcncDialog object at 0x7fa686dcf048>
+2022-12-08 08:26:14,638 - QTvcp.QTVCP.WIDGETS.WIDGET_BASECLASS - WARNING - No objectName for HAL pin: <qtvcp.widgets.dialog_widget.LcncDialog object at 0x7fa686dcf318>
+2022-12-08 08:26:14,639 - QTvcp.QTVCP.WIDGETS.SCREEN_OPTIONS - DEBUG - cannot add notifications to statusbar - no statusbar?:
+2022-12-08 08:26:14,654 - QTvcp.QTVCP.QT_MAKEGUI - INFO - No Handler Override file at: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/.sim_panelrc
+2022-12-08 08:26:14,666 - QTvcp - DEBUG - Set HAL ready.
+2022-12-08 08:26:14,669 - QTvcp - DEBUG - Show window.
+2022-12-08 08:26:14,669 - QTvcp.QTVCP.QT_MAKEPINS - DEBUG - Calculating geometry of main window using natural placement: 1579 564 238 463
+2022-12-08 08:26:14,702 - QTvcp - INFO - Preference path: /home/jura/linuxcnc/configs/QtWoodpecker-master_(1360x768_XXL)/woodpecker.pref
+2022-12-08 08:33:19,428 - QTvcp.QTVCP.WIDGETS.GCODE_EDITOR - ERROR - load_text(): [Errno 2] Нет такого файла или каталога: ''
+2022-12-08 08:33:54,955 - QTvcp.QTVCP.WIDGETS.VERSA_PROBE - DEBUG - Saving Versa probe data to preference file.
+2022-12-08 08:33:56,681 - QTvcp.QTVCP.QT_MAKEPINS - DEBUG - Saving Main Window geometry to preference file.
+2022-12-08 08:33:56,682 - QTvcp.QTVCP.QT_MAKEPINS - DEBUG - Calling widget's _hal_cleanup functions.

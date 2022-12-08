@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/home/jura/linuxcnc/configs/sim.qtvcp_screens.woodpecker">
+    
+    <file>images/WoodPecker.png</file>
+    <file>images/woodpecker.png</file>
+    <file>images/unchecked.png</file>
+  </qresource>
+</RCC>
