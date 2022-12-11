@@ -8,12 +8,11 @@
 </head>
 <body>
 <div class="sidenav">
-    <img src="images/silver_dragon.png" alt="Qt_Dragon">
+    <img src="images/WoodPecker.png" alt="Qt_WoodPecker">
     <ul style="list-style-type:none">
     <li><a href="hole_circle_utility.html">HOLE CIRCLE UTILITY</a></li>
     <li><a href="facing_utility.html">FACING UTILITY</a></li>
     <li><a href="ngcgui.html">NGCGUI</a></li>
-    <li><a href="database.html">TOOL DATABASE</a></li>
     <li><a href="using_a_vfd.html">USING A VFD</a></li>
     <li><a href="spindle_pause.html">SPINDLE PAUSE</a></li>
     <li><a href="z_level_comp.html">Z LEVEL COMPENSATION</a></li>
@@ -43,10 +42,10 @@ and the compensation map is recalculated.</p>
     <pre class="hal">net xpos-cmd         compensate.x-pos <= axis.x.pos-cmd</pre>
     <pre class="hal">net ypos-cmd         compensate.x-pos <= axis.y.pos-cmd</pre>
     <pre class="hal">net zpos-cmd         compensate.x-pos <= halui.axis.z.pos-relative</pre>
-    <pre class="hal">net compensate-on    compensate.enable-in <= qtdragon.comp-on</pre>
+    <pre class="hal">net compensate-on    compensate.enable-in <= woodpecker.comp-on</pre>
     <pre class="hal">net eoffset-clr2     compensate.clear  => or2_1.in1</pre>
-    <pre class="hal">net comp-count       compensate.counts => qtdragon.comp-count</pre>
-    <pre class="hal">net map-ready        compensate.map-ready => qtdragon.map-ready</pre>
+    <pre class="hal">net comp-count       compensate.counts => woodpecker.comp-count</pre>
+    <pre class="hal">net map-ready        compensate.map-ready => woodpecker.map-ready</pre>
     <pre class="hal">setp compensate.fade-height 0.0</pre>
     <pre class="hal">setp axis.z.eoffset-enable True</pre>
 </div>

@@ -9,12 +9,11 @@
 <body>
 
 <div class="sidenav">
-    <img src="images/silver_dragon.png" alt="Qt_Dragon">
+    <img src="images/WoodPecker.png" alt="Qt_WoodPecker">
     <ul style="list-style-type:none">
     <li><a href="hole_circle_utility.html">HOLE CIRCLE UTILITY</a></li>
     <li><a href="facing_utility.html">FACING UTILITY</a></li>
     <li><a href="ngcgui.html">NGCGUI</a></li>
-    <li><a href="database.html">TOOL DATABASE</a></li>
     <li><a href="using_a_vfd.html">USING A VFD</a></li>
     <li><a href="spindle_pause.html">SPINDLE PAUSE</a></li>
     <li><a href="z_level_comp.html">Z LEVEL COMPENSATION</a></li>
@@ -28,7 +27,7 @@
         
 <div class = "main">
 <h1>USING A VFD</h1>
-<p>QtDragon was designed to interface to a VFD, but will work without one for simulation purposes.
+<p>QtWoodPecker was designed to interface to a VFD, but will work without one for simulation purposes.
 There are a number of VFD drivers included in the linuxcnc distribution, including hy_gt_vfd and mb2hal.
 A custom HAL component has been created for use with QtDragon, called hy_gt_vfd.py (same name as the linuxcnc version)</p>
 <p>The following HAL connections must be added to the qtdragon_postgui.hal file:</p>
@@ -38,23 +37,14 @@ A custom HAL component has been created for use with QtDragon, called hy_gt_vfd.
     <pre class="hal">net spindle-on       gt_vfd.spindle-on <= spindle.0.on</pre>
     <pre class="hal">net spindle-fb       gt_vfd.speed-fb => spindle.0.speed-in</pre>
     <pre class="hal">net spindle-cmd      gt_vfd.speed-cmd <= spindle.0.speed-out-abs</pre>
-    <pre class="hal">net spindle-amps     gt_vfd.output-amps => qtdragon.spindle_amps</pre>
-    <pre class="hal">net spindle-volts    gt_vfd.output-volts => qtdragon.spindle_volts</pre>
-    <pre class="hal">net spindle-fault    gt_vfd.fault-info => qtdragon.spindle_fault</pre>
-    <pre class="hal">net modbus-errors    gt_vfd.modbus-errors => qtdragon.modbus-errors</pre>
+    <pre class="hal">net spindle-amps     gt_vfd.output-amps => woodpecker.spindle_amps</pre>
+    <pre class="hal">net spindle-volts    gt_vfd.output-volts => woodpecker.spindle_volts</pre>
+    <pre class="hal">net spindle-fault    gt_vfd.fault-info => woodpecker.spindle_fault</pre>
+    <pre class="hal">net modbus-errors    gt_vfd.modbus-errors => woodpecker.modbus-errors</pre>
     <pre class="hal">net spindle-fwd      spindle.0.forward => and2.0.in1</pre>
     <pre class="hal">net at-speed-fwd     spindle.0.at-speed <= and2.0.out</pre>
-    <pre class="hal">net at-speed-fwd     qtdragon.hal_led_atspeed</pre>
+    <pre class="hal">net at-speed-fwd     woodpecker.hal_led_atspeed</pre>
 </div>
-
-<p>The spindle gauge widget is connected with:</p>
-
-<div class="code-block">
-    <pre class="hal">net spindle-cmd      qtdragon.gauge_spindle_setpoint</pre>
-    <pre class="hal">net gauge_value      qtdragon.gauge_spindle_value <= gt_vfd.speed-rpm</pre>
-</div>
-
-<p></p>
 
 <div class="admonition">
     <p>NOTE: The hy_gt_vfd.py module requires the python pymodbus library.</p>

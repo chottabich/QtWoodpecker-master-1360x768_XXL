@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="sidenav">
-    <img src="images/silver_dragon.png" alt="Qt_Dragon">
+    <img src="images/WoodPecker.png" alt="Qt_WoodPecker">
     <ul style="list-style-type:none">
     <li><a href="hole_circle_utility.html">HOLE CIRCLE UTILITY</a></li>
     <li><a href="facing_utility.html">FACING UTILITY</a></li>
@@ -29,32 +29,22 @@
 <h1>TOOL DATABASE</h1>
 <p>The tool database utility enables the user to store additional information about the tools listed in the linuxcnc tool.tbl file.
 This extra information is kept in a SQLITE database. On startup, the program checks if the database exists and creates one if needed.
-If the database exists, it is updated with any new information in the tool.tbl file. If the tool.tbl contains tools not in the database,
-they are added. If the database contains tools not in the tool.tbl, they are deleted.</p>
+Data that exists in the system tool.tbl cannot be modified by this program. That data can only be modified by the tool_offsetview module.</p>
 
 <h2>Usage</h2>
-<p></p>
+<p>Very little user action is required other than entering data into the parameter fields of the tool information panel. This panel appears
+on the right side of the tool_offset view in the TOOL page.</p>
     <ul>
-    <li>To view tool offsets, click the OFFSET tab. The TOOLS tab shows additional tool information not stored in the tool.tbl</li>
-    <li>A tool is selected by clicking on the checkbox on the left of the display.</li>
-    <li>Presently, only 1 tool can be selected at a time.</li>
-    <li>A combobox is used to select an icon for the selected tool.</li>
+    <li>A combobox is used to select an icon to be displayed whenever a tool is loaded into the spindle.</li>
     <li>To use tool icons, there must be a directory in the CONFIG folder called <i>tool_icons</i>.</li>
     <li>The <i>tool_icons</i> must be .png images. This enables them to have transparent backgrounds.</li>
-    <li>The preferred icon size is 160 x 270 pixels.</li>
-    <li>The ADD  button adds a new tool using the next lowest tool number available.</li>
-    <li>The DELETE button removes the selected tool from the tool.tbl</li>
-    <li>The LOAD button issues a M61 Qn MDI command where n is the selected tool number.</li>
-    <li>The UNLOAD button issues a M61 Q0 MDI command, which tells linuxcnc there is no tool in the spindle.</li>
-    <li>ENABLE EDIT enables editing of individual table cells.</li>
-    <li>EXPORT TABLE creates a PDF file of both the OFFSET table and the TOOL table. The filename is selected via a file chooser dialog.</li>
-    <li>Modified tool parameters will only be saved if the machine is ON and the interpreter is IDLE.</li>
+    <li>If a recommended RPM value is entered, a corresponding SCS value is calculated.</li>
+    <li>All parameter fields that are editable can be filled in without committing them to the database.</li>
+    <li>To commit the changes to the database, the user must press RETURN on one of the parameter fields.</li>
+    <li>If the ADD TOOL button on the tool_offsetview is pressed, the tool info panel will show the next lowest tool number available.</li>
+    <li>Currently, duplicate tool numbers are not allowed. (This may change in the future).</li>
+    <li>To display the stored info for a particular tool, set that tool to checked in the tool_offsetview.</li>
+    <li>Tool parameters can only be modified if the machine is ON and the interpreter is IDLE.</li>
     </ul>
-
-<div class="admonition">
-<p>The tool database file in the config directory is called <i>tool_database.db</i>. It is advised to maintain regular backups of this
-file. If it becomes corrupted, all information the user has entered may be lost and will have to be re-entered in a new database.</p>
-</div>
-
 </body>
 </html>
