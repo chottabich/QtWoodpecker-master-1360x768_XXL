@@ -20,15 +20,8 @@ QPushButton {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #606060, stop:1 #202020);
     border: 1px solid black;
     border-radius: 4px;
-    font: 14pt "Bebas Kai";
-    color: #FFFF00;
-}
-
-QToolButton:pressed,
-QToolButton:checked {
-    background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #606060, stop:1 #202020);
-    border: 1px solid #e0e0e0;
-    color: #FFFF00;
+    font: 10pt "Lato Heavy";
+    color: #90aaff;
 }
 
 QPushButton:hover,
@@ -44,13 +37,13 @@ QPushButton:checked {
     color: black;
 }
 
-QLabel#lbl_home_all[homed=true] {
+QPushButton#btn_home_all[ihomed=true] {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #808080, stop:1 #e0e0e0);
     border: 1px solid #e0e0e0;
     color: black;
 }
 
-QLabel#lbl_home_all[homed=false] {
+QPushButton#btn_home_all[homed=false] {
     color: red;
 }
 
@@ -60,80 +53,6 @@ ActionButton#action_machine_on {
 
 ActionButton#action_machine_on:checked {
     color: black;
-}
-
-ActionButton#action_estop {
-    border-color: #FF0000;
-    color: #FF0000;
-}
-
-ActionButton#action_estop:checked {
-    border-color: #9ad58d;
-    color: #FFFF00;
-}
-
-#action_mist{
-qproperty-true_state_string: "Air\\nOn";
-qproperty-false_state_string: "Air\\nOff";
-}
-
-AxisToolButton:enabled {
-    color: #FFFF00;
-}
-
-AxisToolButton:disabled {
-    color: darkgray;
-}
-
-AxisToolButton:pressed {
-    background:  qlineargradient(x1: 0, y1: 0, stop: 0 #5C5959, stop: 1.0 #A19E9E)
-}
-
-AxisToolButton:checked {
-    background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #808080, stop:1 #e0e0e0);
-    border: 1px solid #e0e0e0;
-    color: black;
-}
-
-/* Style the tab using the tab sub-control. Note that it reads QTabBar _not_ QTabWidget */
-/** Tab Widget **/
-QTabWidget::pane {
-  border: 1px solid gray;
-  top:-1px; 
-      background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #606060, stop:1 #202020);
-}
-
-QTabBar::tab {
-    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #303030, stop:1 #909090);
-    border: 1px solid black;
-    border-radius: 2px;
-    min-height: 40px;
-    min-width: 117px;
-    font: 14pt "Bebas Kai";
-    color: #FFFF00;
-}
-
-QTabBar::tab:selected {
-    background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #808080, stop:1 #e0e0e0);
-    color: #202020;
-}
-
-QTabBar::tab:hover {
-    border: 2px solid #3DAEE9;
-}
-
-/** Status Adjustment Bars **/
-StatusAdjustmentBar > QProgressBar {
-}
-
-#adj_maxv_ovr > QToolButton,
-#adj_rapid_ovr > QToolButton,
-#adj_feed_ovr > QToolButton,
-#adj_linear_jog > QToolButton,
-#adj_angular_jog > QToolButton,
-#adj_spindle_ovr > QToolButton {
-    min-width: 50px;
-    min-height: 40px;
 }
 
 /** Checkboxes **/
@@ -168,7 +87,7 @@ QComboBox {
     border-radius: 2px;
     min-width: 100px;
     padding: 1px 0px 1px 8px;
-    font: 12pt "Bebas Kai";
+    font: 10pt "Lato Heavy";
     color: #e0e0e0;
 }
 
@@ -180,7 +99,6 @@ QComboBox::drop-down {
 
 QComboBox::item {
     background-color: #303030;
-    font: 12pt "Bebas Kai";
     color: #e0e0e0;
 }
 
@@ -222,13 +140,8 @@ QDoubleSpinBox::down-button {
 
 /** Labels **/
 QLabel {
-    background-color: #404040;
-    font: 13pt "Bebas Kai";
-    color: #FD9900;
-}
-
-#lbl_home_all {
-     color: #FFFF00;
+    font: 10pt "Lato Heavy";
+    color: #00FF00;
 }
 
 QLabel#label_axis_x,  QLabel#label_axis_y,  QLabel#label_axis_z,  QLabel#label_axis_a, QLabel#label_axis_b {
@@ -245,7 +158,7 @@ QLineEdit {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #808080, stop:1 #e0e0e0);
     border: 1px solid #e0e0e0;
     border-radius: 4px;
-    font: 13pt "Bebas Kai";
+    font: 10pt "Lato Heavy";
     color: black;
 }
 
@@ -253,40 +166,19 @@ StatusLabel#lbl_gcodes,
 StatusLabel#lbl_mcodes {
     background: transparent;
     border: none;
-    font: 13pt "Bebas Kai";
-    color: black;
-}
-
-Calculator QLineEdit, NumDigitButtons{
-  font: 25pt "Lato Heavy";
-  background-color: #0a0a0a;
-  color: #00FF00;
-}
-
-Calculator QPushButton{
-  font: 13pt "Lato Heavy";
+    color: #e0e0e0;
 }
 
 DROLabel {
     background: #202020;
-    border: 1px solid #C0C0C0;
+    border: 1px solid #e0e0e0;
     border-radius: 4px;
     font: 20pt "Lato Heavy";
-    color: #00FF00;
+    color: #00aaff;
 }
 
 DROLabel[isHomed=false] {
     color: red;
-}
-
-QGroupBox:enabled {
-    font: 75 12pt "DejaVu Serif";
-    color: rgb(245, 121, 0);
-}
-
-QWidget:disabled {
-    color: #454545;
-    background-color: #323232;
 }
 
 /** Sliders **/
@@ -334,6 +226,20 @@ QSlider::handle:vertical {
     border-radius: 2px;
 }
 
+/** Status Adjustment Bars **/
+StatusAdjustmentBar > QProgressBar {
+}
+
+#adj_maxv_ovr > QToolButton,
+#adj_rapid_ovr > QToolButton,
+#adj_feed_ovr > QToolButton,
+#adj_linear_jog > QToolButton,
+#adj_angular_jog > QToolButton,
+#adj_spindle_ovr > QToolButton {
+    min-width: 40px;
+    min-height: 40px;
+}
+
 QProgressBar {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #808080, stop:1 #e0e0e0);
     border: 1px solid #e0e0e0;
@@ -351,31 +257,39 @@ QProgressBar::chunk:horizontal {
 QTableView,
 QListView,
 QTreeView {
-    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(80, 80, 80, 255), stop:1 rgba(0, 0, 0, 255));
     selection-background-color: transparent;
     qproperty-alternatingRowColors: false;
-    border: 1px solid black;
-    gridline-color: black;
     font: 10pt "Lato Heavy";
-    color: #FFFFFF;
+    color: #e0e0e0;
 }
 
 QTableView::item:hover,
 QListView::item:hover,
 QTreeView::item:hover {
-    border: 1px solid #9ad58d;
+    border: 1px solid #e0e0e0;
 }
 
 QTableView::item:pressed,
 QTreeView::item:pressed {
-    color: #9ad58d;
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #808080, stop:1 #e0e0e0);
+    color: #202020;
 }
 
 QTableView::item:selected:active,
 QTreeView::item:selected:active,
 QListView::item:selected:active {
-    border: 1px solid #9ad58d;
-    color: #FFFF00;
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #808080, stop:1 #e0e0e0);
+    color: #202020;
+}
+
+QTableView#tooloffsetview {
+    qproperty-styleColorSelection: #404040;
+    qproperty-styleColorHighlight: #606060;
+}
+
+QTableView#offset_table {
+    qproperty-styleColorHighlight: #606060;
 }
 
 QHeaderView {
@@ -471,6 +385,28 @@ QScrollBar::sub-page:vertical {
     background: none;
 }
 
+/** Tab Widget **/
+QTabWidget::pane {
+  border: 1px solid gray;
+  top:-1px; 
+      background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #606060, stop:1 #202020);
+}
+
+QTabBar::tab {
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #303030, stop:1 #909090);
+    border: 1px solid black;
+    border-radius: 2px;
+    min-height: 38px;
+    min-width: 100px;
+    font: 10pt "Lato Heavy";
+    color: #e0e0e0;
+}
+
+QTabBar::tab:selected {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #808080, stop:1 #e0e0e0);
+    color: #202020;
+}
+
 /** Miscellaneous **/
 .QFrame {
     background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
@@ -478,14 +414,34 @@ QScrollBar::sub-page:vertical {
     border-radius: 6px;
 }
 
-QTextEdit {
+.QFrame#frame_lower {
+    background: transparent;
+    border: none;
+}
+
+QGroupBox {
     background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
+    border: 1px solid #c0c0c0;
+    border-radius: 6px;
+    margin-top: 1ex;
+    font: 10pt "Lato Heavy";
+}
+
+QGroupBox::Title {
+    subcontrol-origin: margin;
+    subcontrol-position: top-center;
+    padding: 0 4px;
     color: #e0e0e0;
 }
 
-QPlainTextEdit {
-    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));;
-/*    border-radius: 2px;*/
+QWidget:disabled {
+    color: #454545;
+    background-color: #323232;
+}
+
+QPlainTextEdit,
+QTextEdit {
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(80, 80, 80, 255), stop:1 rgba(0, 0, 0, 255));
     color: #e0e0e0;
 }
 
@@ -530,7 +486,6 @@ QStatusBar {
 GCodeEditor#gcode_viewer {
     background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
 }
-
 
 /* warning colors for SPINDLE overrides if out of normal range*/
 

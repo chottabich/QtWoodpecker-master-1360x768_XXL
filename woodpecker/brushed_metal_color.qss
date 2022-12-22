@@ -162,16 +162,6 @@ Label {
     border-radius: 3px;
 }
 
-Calculator QLineEdit, NumDigitButtons{
-  font: 25pt "Lato Heavy";
-  background-color: #0a0a0a;
-  color: #00FF00;
-}
-
-Calculator QPushButton{
-  font: 13pt "Lato Heavy";
-}
-
 DROLabel {
     background: #202020;
     border: 1px solid black;
@@ -209,6 +199,14 @@ QCheckBox {
 QCheckBox::indicator {
     width: 12px;
     height: 12px;
+}
+
+QCheckBox::indicator:unchecked {
+    image: url(woodpecker/images/unchecked.png);
+}
+
+QCheckBox::indicator:checked {
+    image: url(woodpecker/images/checked.png);
 }
 
 QComboBox {
@@ -266,9 +264,6 @@ QProgressBar {
 QProgressBar::chunk {
     background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,
     stop: 0 #bbf, stop: 1 #55f);
-}
-
-.QFrame {
 }
 
 QFrame#frame_cycle_start,
@@ -358,9 +353,11 @@ QSlider::handle:vertical {
     margin-right: -4px;
     border-radius: 2px;
 }
+
 QDialog{
 background-image: url(:/images/images/brushed_metal.png);
 }
+
 ToolDialog QPushButton{
     width: 100px;
     height: 40px;
@@ -404,4 +401,41 @@ QTabBar::tab:!selected {
     margin-top: 2px; /* make non-selected tabs look smaller */
 }
 
+/* warning colors for SPINDLE overrides if out of normal range*/
 
+#slider_spindle_ovr {
+    qproperty-alertOver: 105.0;
+}
+#slider_spindle_ovr {
+    qproperty-alertUnder: 75.1;
+}
+#slider_spindle_ovr[alertState='over'] {
+    background: yellow;
+}
+#slider_spindle_ovr[alertState='under'] {
+    background: red;
+}
+
+/* warning colors for FEED overrides if out of normal range*/
+
+#slider_feed_ovr {
+    qproperty-alertOver: 105.0;
+}
+#slider_feed_ovr {
+    qproperty-alertUnder: 75.1;
+}
+#slider_feed_ovr[alertState='over'] {
+    background: red;
+}
+#slider_feed_ovr[alertState='under'] {
+    background: yellow;
+}
+
+/* warning colors for RAPID overrides if out of normal range*/
+
+#slider_rapid_ovr {
+    qproperty-alertUnder: 75.1;
+}
+#slider_rapid_ovr[alertState='under'] {
+    background: yellow;
+}

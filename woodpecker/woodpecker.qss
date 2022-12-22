@@ -119,16 +119,16 @@ QCheckBox::indicator {
 }
 
 QCheckBox::indicator:unchecked {
-    image: url(images/unchecked.png);
+    image: url(:/buttons/images/unchecked.png);
 }
 
 QCheckBox::indicator:checked {
-    image: url(images/checked.png);
+    image: url(:/buttons/images/checked.png);
 }
 
 QComboBox {
     border: 1px solid black;
-    width: 20px;
+    min-width: 100px;
     font: 12pt "Bebas Kai";
     color: black;    
 }
@@ -423,4 +423,43 @@ ToolDialog QPushButton{
 EntryDialog QPushButton, CloseDialog QPushButton{
     width: 80px;
     height: 40px;
+}
+
+/* warning colors for SPINDLE overrides if out of normal range*/
+
+#slider_spindle_ovr {
+    qproperty-alertOver: 105.0;
+}
+#slider_spindle_ovr {
+    qproperty-alertUnder: 75.1;
+}
+#slider_spindle_ovr[alertState='over'] {
+    background: yellow;
+}
+#slider_spindle_ovr[alertState='under'] {
+    background: red;
+}
+
+/* warning colors for FEED overrides if out of normal range*/
+
+#slider_feed_ovr {
+    qproperty-alertOver: 105.0;
+}
+#slider_feed_ovr {
+    qproperty-alertUnder: 75.1;
+}
+#slider_feed_ovr[alertState='over'] {
+    background: red;
+}
+#slider_feed_ovr[alertState='under'] {
+    background: yellow;
+}
+
+/* warning colors for RAPID overrides if out of normal range*/
+
+#slider_rapid_ovr {
+    qproperty-alertUnder: 75.1;
+}
+#slider_rapid_ovr[alertState='under'] {
+    background: yellow;
 }
