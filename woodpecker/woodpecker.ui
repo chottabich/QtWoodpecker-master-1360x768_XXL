@@ -7,7 +7,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1360</width>
+    <width>1417</width>
     <height>768</height>
    </rect>
   </property>
@@ -1686,6 +1686,9 @@ ROTATION</string>
                         </item>
                        </layout>
                       </widget>
+                     </item>
+                     <item row="1" column="0" colspan="2">
+                      <widget class="VirtualKeyboard" name="virtualkeyboard_2"/>
                      </item>
                     </layout>
                    </widget>
@@ -4591,7 +4594,7 @@ TOUCHY</string>
                     </size>
                    </property>
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="gcode_page">
                     <property name="sizePolicy">
@@ -4828,6 +4831,9 @@ TOUCHY</string>
                              </property>
                              <property name="readOnly">
                               <bool>false</bool>
+                             </property>
+                             <property name="cursorMoveStyle">
+                              <enum>Qt::VisualMoveStyle</enum>
                              </property>
                             </widget>
                            </item>
@@ -12882,21 +12888,18 @@ color: rgb(51, 255, 0);</string>
                                      </widget>
                                     </item>
                                     <item>
-                                     <widget class="LED" name="hal_led_home_x">
-                                      <property name="sizePolicy">
-                                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                       </sizepolicy>
-                                      </property>
+                                     <widget class="StateLED" name="hal_led_home_x">
                                       <property name="minimumSize">
                                        <size>
                                         <width>24</width>
                                         <height>24</height>
                                        </size>
                                       </property>
-                                      <property name="diameter">
-                                       <number>15</number>
+                                      <property name="maximumSize">
+                                       <size>
+                                        <width>24</width>
+                                        <height>24</height>
+                                       </size>
                                       </property>
                                       <property name="color">
                                        <color>
@@ -12904,6 +12907,16 @@ color: rgb(51, 255, 0);</string>
                                         <green>255</green>
                                         <blue>0</blue>
                                        </color>
+                                      </property>
+                                      <property name="off_color" stdset="0">
+                                       <color>
+                                        <red>255</red>
+                                        <green>0</green>
+                                        <blue>0</blue>
+                                       </color>
+                                      </property>
+                                      <property name="is_joint_homed_status" stdset="0">
+                                       <bool>true</bool>
                                       </property>
                                      </widget>
                                     </item>
@@ -12936,21 +12949,18 @@ color: rgb(51, 255, 0);</string>
                                      </widget>
                                     </item>
                                     <item>
-                                     <widget class="LED" name="hal_led_home_y">
-                                      <property name="sizePolicy">
-                                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                       </sizepolicy>
-                                      </property>
+                                     <widget class="StateLED" name="hal_led_home_y">
                                       <property name="minimumSize">
                                        <size>
                                         <width>24</width>
                                         <height>24</height>
                                        </size>
                                       </property>
-                                      <property name="diameter">
-                                       <number>15</number>
+                                      <property name="maximumSize">
+                                       <size>
+                                        <width>24</width>
+                                        <height>24</height>
+                                       </size>
                                       </property>
                                       <property name="color">
                                        <color>
@@ -12958,6 +12968,19 @@ color: rgb(51, 255, 0);</string>
                                         <green>255</green>
                                         <blue>0</blue>
                                        </color>
+                                      </property>
+                                      <property name="off_color" stdset="0">
+                                       <color>
+                                        <red>255</red>
+                                        <green>0</green>
+                                        <blue>0</blue>
+                                       </color>
+                                      </property>
+                                      <property name="is_joint_homed_status" stdset="0">
+                                       <bool>true</bool>
+                                      </property>
+                                      <property name="joint_number_status" stdset="0">
+                                       <number>1</number>
                                       </property>
                                      </widget>
                                     </item>
@@ -12990,21 +13013,18 @@ color: rgb(51, 255, 0);</string>
                                      </widget>
                                     </item>
                                     <item>
-                                     <widget class="LED" name="hal_led_home_z">
-                                      <property name="sizePolicy">
-                                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                       </sizepolicy>
-                                      </property>
+                                     <widget class="StateLED" name="hal_led_home_z">
                                       <property name="minimumSize">
                                        <size>
                                         <width>24</width>
                                         <height>24</height>
                                        </size>
                                       </property>
-                                      <property name="diameter">
-                                       <number>15</number>
+                                      <property name="maximumSize">
+                                       <size>
+                                        <width>24</width>
+                                        <height>24</height>
+                                       </size>
                                       </property>
                                       <property name="color">
                                        <color>
@@ -13012,6 +13032,19 @@ color: rgb(51, 255, 0);</string>
                                         <green>255</green>
                                         <blue>0</blue>
                                        </color>
+                                      </property>
+                                      <property name="off_color" stdset="0">
+                                       <color>
+                                        <red>255</red>
+                                        <green>0</green>
+                                        <blue>0</blue>
+                                       </color>
+                                      </property>
+                                      <property name="is_joint_homed_status" stdset="0">
+                                       <bool>true</bool>
+                                      </property>
+                                      <property name="joint_number_status" stdset="0">
+                                       <number>2</number>
                                       </property>
                                      </widget>
                                     </item>
@@ -18708,6 +18741,11 @@ DISTANCE</string>
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>StateLED</class>
+   <extends>LED</extends>
+   <header>qtvcp.widgets.state_led</header>
+  </customwidget>
+  <customwidget>
    <class>StatusLabel</class>
    <extends>QLabel</extends>
    <header>qtvcp.widgets.status_label</header>
@@ -20072,11 +20110,11 @@ DISTANCE</string>
   <slot>slot1()</slot>
  </slots>
  <buttongroups>
-  <buttongroup name="page_buttonGroup"/>
-  <buttongroup name="axis_buttonGroup"/>
   <buttongroup name="mode_buttonGroup"/>
-  <buttongroup name="view_buttonGroup"/>
-  <buttongroup name="view2_buttonGroup"/>
   <buttongroup name="view1_buttonGroup"/>
+  <buttongroup name="view2_buttonGroup"/>
+  <buttongroup name="page_buttonGroup"/>
+  <buttongroup name="view_buttonGroup"/>
+  <buttongroup name="axis_buttonGroup"/>
  </buttongroups>
 </ui>
