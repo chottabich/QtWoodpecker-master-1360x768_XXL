@@ -73,7 +73,7 @@ class HandlerClass:
         self.gcodes = GCodes(widgets)
         self._last_count = 0
         self.degree = u"\N{DEGREE SIGN}".encode('utf-8')
-        self.valid = QtGui.QDoubleValidator(-999.999, 999.999, 3).setLocale(QtCore.QLocale("en_US"))
+        self.valid = QtGui.QRegExpValidator(QtCore.QRegExp('-?[0-9]{0,6}[.][0-9]{0,3}'))
         self.styleeditor = SSE(widgets, paths)
         KEYBIND.add_call('Key_F10','on_keycall_F10')
         KEYBIND.add_call('Key_F11','on_keycall_F11')
@@ -108,7 +108,8 @@ class HandlerClass:
         self.min_spindle_rpm = INFO.MIN_SPINDLE_SPEED
         self.max_spindle_rpm = INFO.MAX_SPINDLE_SPEED
         self.max_linear_velocity = INFO.MAX_TRAJ_VELOCITY
-        self.system_list = ["G54","G55","G56","G57","G58","G59","G59.1","G59.2","G59.3"]        
+        self.system_list = ["G54","G55","G56","G57","G58","G59","G59.1","G59.2","G59.3"] 
+        self.tab_index_code = (0, 4, 1, 0, 2, 0, 5, 4, 5, 0, 4, 0)       
         self.slow_jog_factor = 10
         self.reload_tool = 0
         self.current_style = ""
@@ -122,12 +123,12 @@ class HandlerClass:
                               "laser_x", "laser_y", "sensor_x", "sensor_y",
                               "search_vel", "probe_vel", "max_probe", "eoffset_count"]
         self.onoff_list = ["frame_dro"]
-        self.auto_list = ["chk_eoffsets", "cmb_gcode_history", "btn_pause_spindle"]
+        self.auto_list = ["chk_eoffsets", "cmb_gcode_history", "btn_pause_spindle", "btn_file", "btn_offset", "btn_camera", "btn_tool", "btn_probe", "btn_utils", "btn_touchy"]
         self.axis_a_list = ["label_axis_a", "dro_axis_a", "action_zero_a", "axistoolbutton_a",
-                            "action_home_a", "slider_jog_angular", "btn_jog_a_slow", "widget_increments_angular",
-                            "btn_jog_pos_a", "btn_jog_neg_a", "status_label_jog_angular"] 
-        self.button_response_list = ["btn_start", "btn_home_all", "btn_home_x", "btn_home_y",
-                            "btn_home_z", "action_home_a", "btn_reload_file"]
+                            "dro_button_stack_a", "adj_angular_jog", "btn_jog_a_slow", "status_jog_angular", "widget_increments_angular",
+                            "btn_jog_pos_a", "btn_jog_neg_a"] 
+        self.button_response_list = ["btn_start", "btn_home_all", "dro_button_stack_x", "dro_button_stack_y",
+                            "dro_button_stack_z", "dro_button_stack_a", "btn_reload_file"]
         self.idleList = ['file_open', 'file_reload', 'file_edit']       
 
         STATUS.connect('general', self.dialog_return)
@@ -157,6 +158,7 @@ class HandlerClass:
         STATUS.connect('progress', lambda w,p,t: self.updateProgress(p,t))
         STATUS.connect('override-limits-changed', lambda w, state, data: self._check_override_limits(state, data))
         STATUS.connect('interp-idle', lambda w: self.stop_timer())
+        STATUS.connect('graphics-gcode-properties', lambda w, d: self.update_gcode_properties(d))   
         self._block_signal = False
 
         self.html = """<html>
@@ -602,22 +604,7 @@ class HandlerClass:
                     event.accept()
                     return True
         if event.isAutoRepeat():return True
-        # ok if we got here then try keybindings
-        #try:
-            #KEYBIND.call(self,event,is_pressed,shift,cntrl)
-            #event.accept()
-            #return True
-        #except NameError as e:
-            #if is_pressed:
-                #LOG.debug('Exception in KEYBINDING: {}'.format (e))
-                #self.add_status('Exception in KEYBINDING: {}'.format (e))
-        #except Exception as e:
-            #if is_pressed:
-                #LOG.debug('Exception in KEYBINDING:', exc_info=e)
-                #print ('Error in, or no function for: %s in handler file for-%s'%(KEYBIND.convert(event),key))
-        #event.accept()
-        #return True
-
+       
      # ok if we got here then try keybindings function calls
         # KEYBINDING will call functions from handler file as
         # registered by KEYBIND.add_call(KEY,FUNCTION) above
@@ -883,57 +870,44 @@ class HandlerClass:
             self.w.widgetswitcher_2.show_id_widget(1)
         elif state == 0:
             self.w.widgetswitcher_2.show_id_widget(0)
-            
-                                          
+                                                      
        #main button bar
     def main_tab_changed(self, btn):
         index = btn.property("index")
         if index == self.w.main_tab_widget.currentIndex():
             self.w.main_tab_widget.setCurrentIndex(0)
             self.w.gcode_stack.setCurrentIndex(0)
-        if index is None: return       
-        # if in automode still allow settings to show so override linits can be used
-        if STATUS.is_auto_mode() and index != 9:
-            self.add_status("Cannot switch pages while in AUTO mode")
-            # make sure main page is showing
-            self.w.main_tab_widget.setCurrentIndex(0)            
-            self.w.view_btn.setChecked(True)
-            self.w.gcode_stack.setCurrentIndex(0)
-            return        
-        self.w.main_tab_widget.setCurrentIndex(index)                
-        if index == TAB_ABOUT:
-            self.w.main_tab_widget.setCurrentIndex(11)
-            self.w.dro_gcode_frame.hide()
-        else:
-            self.w.dro_gcode_frame.show()
+        if index is None: return                            
+        self.w.gcode_stack.setCurrentIndex(self.tab_index_code[index])         
+        self.w.main_tab_widget.setCurrentIndex(index)
         if index == TAB_VIEW:
             self.w.view_btn.setChecked(True)            
             self.w.main_tab_widget.setCurrentIndex(0)
             self.w.gcode_stack.setCurrentIndex(0)
+        # show ngcgui info tab if utilities tab is selected
+        # but only if the utilities tab has ngcgui selected
+        if index == TAB_UTILS:
+            self.w.tabWidget_utilities.setCurrentIndex(2) 
+            self.w.gcode_stack.setCurrentIndex(3)        
         if index == TAB_FILE:
             self.w.btn_file.setChecked(True)
             self.w.mainTab.setCurrentIndex(0)
             self.w.main_tab_widget.setCurrentIndex(1)            
-            self.w.gcode_stack.setCurrentIndex(4)        
-        elif index == TAB_OFFSETS:            
-            self.w.main_tab_widget.setCurrentIndex(2) 
-            self.w.gcode_stack.setCurrentIndex(1)
-        elif index == TAB_TOOL:
-            self.w.gcode_stack.setCurrentIndex(2)
-        elif index == TAB_PROBE:
-            self.w.gcode_stack.setCurrentIndex(5)        
-        elif index == TAB_MDI_TOUCHY:
-            self.w.gcode_stack.setCurrentIndex(5)       
-        elif index == TAB_SETUP:
-            self.w.gcode_stack.setCurrentIndex(4)                 
+            self.w.gcode_stack.setCurrentIndex(4)                
+        if index == TAB_ABOUT:
+            self.w.main_tab_widget.setCurrentIndex(11)
+            self.w.dro_gcode_frame.hide()
         else:
-            self.w.gcode_stack.setCurrentIndex(0)
-
-        # show ngcgui info tab if utilities tab is selected
-        # but only if the utilities tab has ngcgui selected
-        if index == TAB_UTILS:
-            if self.w.tabWidget_utilities.currentIndex() == 2:
-                self.w.gcode_stack.setCurrentIndex(3)
+            self.w.dro_gcode_frame.show()        
+                
+        
+    # toggle home/tool offsets buttons in DRO section
+        if index == TAB_TOOL:
+            num = 1
+        else:
+            num = 0
+        for i in INFO.AVAILABLE_AXES:
+            self.w['dro_button_stack_%s'%i.lower()].setCurrentIndex(num)
                
     def mdi_select_text(self):
         if self.w.cmb_mdi_texts.currentIndex() <= 0: return
@@ -1032,33 +1006,35 @@ class HandlerClass:
 
     # tool frame
     def btn_pause_spindle_clicked(self, state):
-        self.w.action_pause.setEnabled(not state)
-        self.w.action_step.setEnabled(not state)
-        if state:
-        # set external offsets to lift spindle
-            self.h['eoffset-enable'] = self.w.chk_eoffsets.isChecked()
-            fval = float(self.w.lineEdit_eoffset_count.text())
-            self.h['eoffset-spindle-count'] = int(fval)
-            self.w.spindle_eoffset_value.setText(self.w.lineEdit_eoffset_count.text())
-            self.h['spindle-inhibit'] = True
-            #self.w.btn_enable_comp.setChecked(False)
-            #self.w.widget_zaxis_offset.hide()
-            if not QHAL.hal.component_exists("z_level_compensation"):
-                self.add_status("Z level compensation HAL component not loaded", CRITICAL)
-                return
-            #self.h['comp-on'] = False
-        else:
-            self.h['eoffset-spindle-count'] = 0
-            self.w.spindle_eoffset_value.setText('0')
-            #self.h['eoffset-clear'] = True
-            self.h['spindle-inhibit'] = False
-            if STATUS.is_auto_running():
-            # instantiate warning box
-                info = "Wait for spindle at speed signal before resuming"
-                mess = {'NAME':'MESSAGE', 'ICON':'WARNING',
+        eofsets = self.w.chk_eoffsets.isChecked()
+        if eofsets:
+            self.w.action_pause.setEnabled(not state)
+            self.w.action_step.setEnabled(not state)
+            if state:
+            # set external offsets to lift spindle
+                self.h['eoffset-enable'] = self.w.chk_eoffsets.isChecked()
+                fval = float(self.w.lineEdit_eoffset_count.text())
+                self.h['eoffset-spindle-count'] = int(fval)
+                self.w.spindle_eoffset_value.setText(self.w.lineEdit_eoffset_count.text())
+                self.h['spindle-inhibit'] = True
+                #self.w.btn_enable_comp.setChecked(False)
+                #self.w.widget_zaxis_offset.hide()
+                if not QHAL.hal.component_exists("z_level_compensation"):
+                    self.add_status("Z level compensation HAL component not loaded", CRITICAL)
+                    return
+                #self.h['comp-on'] = False
+            else:
+                self.h['eoffset-spindle-count'] = 0
+                self.w.spindle_eoffset_value.setText('0')
+                #self.h['eoffset-clear'] = True
+                self.h['spindle-inhibit'] = False
+                if STATUS.is_auto_running():
+                # instantiate warning box
+                    info = "Wait for spindle at speed signal before resuming"
+                    mess = {'NAME':'MESSAGE', 'ICON':'WARNING',
                         'ID':'_wait_resume_', 'MESSAGE':'CAUTION',
                         'NONBLOCKING':'True', 'MORE':info, 'TYPE':'OK'}
-                ACTION.CALL_DIALOG(mess)
+                    ACTION.CALL_DIALOG(mess)
 
     def btn_enable_comp_clicked(self, state):
         if state:
@@ -1325,6 +1301,10 @@ class HandlerClass:
             self.w.widget_mdi_controls.show()
         self.w.mdihistory.set_soft_keyboard(state)
         self.w.mdiline.set_soft_keyboard(state)
+
+    def chk_eoffsets_checked(self, state):
+        if state:
+            self.w.lineEdit_eoffset_count.text()
         
     # settings tab
     def chk_override_limits_checked(self, state):
@@ -1358,7 +1338,7 @@ class HandlerClass:
     def apply_stylesheet_clicked(self, index):
         if self.w.cmb_stylesheet.currentText() == "As Loaded": return
         self.styleeditor.styleSheetCombo.setCurrentIndex(index)
-        self.styleeditor.on_applyButton_clicked() 
+        self.styleeditor.on_applyButton_clicked()
 
     # show ngcgui info tab (in the stackedWidget) if ngcgui utilites
     # tab is selected
@@ -1450,7 +1430,7 @@ class HandlerClass:
             self.w.main_tab_widget.setCurrentIndex(0)
             self.w.mainTab.setCurrentIndex(1)
             self.w.view_btn.setChecked(True)
-            self.w.gcode_stack.setCurrentIndex(0) 
+            self.w.gcode_stack.setCurrentIndex(0)
             self.w.filemanager.recordBookKeeping()        
 
             # adjust ending to check for related HTML setup files
@@ -1490,7 +1470,42 @@ class HandlerClass:
                 self.w.main_tab_widget.setCurrentIndex(TAB_SETUP)
                 self.w.gcode_stack.setCurrentIndex(4)
                 self.w.btn_setup.setChecked(True)
-                self.w.tabWidget_setup.setCurrentIndex(1)                
+                self.w.tabWidget_setup.setCurrentIndex(1) 
+
+    def update_gcode_properties(self, props ):
+        # substitute nice looking text:
+        property_names = {
+            'name': "Name:", 'size': "Size:",
+    '       tools': "Tool order:", 'g0': "Rapid distance:",
+            'g1': "Feed distance:", 'g': "Total distance:",
+            'run': "Run time:",'machine_unit_sys':"Machine Unit System:",
+            'x': "X bounds:",'x_zero_rxy':'X @ Zero Rotation:',
+            'y': "Y bounds:",'y_zero_rxy':'Y @ Zero Rotation:',
+            'z': "Z bounds:",'z_zero_rxy':'Z @ Zero Rotation:',
+            'a': "A bounds:", 'b': "B bounds:",
+            'c': "C bounds:",'toollist':'Tool Change List:',
+            'gcode_units':"Gcode Units:"
+        }
+
+        smallmess = mess = ''
+        if props:
+            for i in props:
+                smallmess += '<b>%s</b>: %s<br>' % (property_names.get(i), props[i])
+                mess += '<span style=" font-size:15pt; font-weight:600; color:black;">%s </span>\
+<span style=" font-size:15pt; font-weight:600; color:#aa0000;">%s</span>\
+<br>'% (property_names.get(i), props[i])
+
+        # put the details into the properties page
+        self.w.textedit_properties.setText(mess)
+        return
+        # pop a dialog of the properties
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Information)
+        msg.setText(smallmess)
+        msg.setWindowTitle("Gcode Properties")
+        msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        msg.show()
+        retval = msg.exec_()               
 
     def back(self):
         if os.path.exists(self.default_setup):
@@ -1511,12 +1526,6 @@ class HandlerClass:
         self.w.lineEdit_statusbar.setStyleSheet("background-color: rgb(242, 246, 103);color: rgb(0,0,0)")  #yelow
     def set_style_critical(self):
         self.w.lineEdit_statusbar.setStyleSheet("background-color: rgb(255, 144, 0);color: rgb(0,0,0)")   #orange
-
-    def disable_spindle_pause(self):
-        self.h['eoffset-count'] = 0
-        self.h['spindle-inhibit'] = False
-        if self.w.btn_pause_spindle.isChecked():
-            self.w.btn_pause_spindle.setChecked(False)
 
     def touchoff(self, selector):
         if selector == 'touchplate':
